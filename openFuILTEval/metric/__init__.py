@@ -3,7 +3,7 @@ from .metric import LocalMetric
 from .metric import ShotCounter
 from .metric import getLoss
 from .metric import getPVBand
-from .EPE import EPEChecker
+from .epe import EPEChecker
 
 
 __all__ = ['Metric', 
