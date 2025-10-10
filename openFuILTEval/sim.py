@@ -36,5 +36,3 @@ class SimEval:
         return ariel_image
     
     
-    
-    

@@ -145,22 +145,3 @@ class Evaluator:
             
             self._drop(mask_tile, print_image, target)
             
-            
-            
-
-
-            
-           
-        
-        
-        
-            
-            
-        
-            
-
-        
-        
-        
-        
-        
