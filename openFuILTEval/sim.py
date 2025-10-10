@@ -33,6 +33,7 @@ class SimEval:
             ariel_image = ariel_image.squeeze(0)
         assert ariel_image.dim() == 3 and ariel_image.shape[0] == 3, \
             f"Ariel image should be a 3D tensor with 3 channels, but we got {ariel_image.shape}"
-        return ariel_image
+        print_image = torch.sigmoid(self.print_config.stepness * (ariel_image - self.print_config.targetIntensity))
+        return print_image
     
     
