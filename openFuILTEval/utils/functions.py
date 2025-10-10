@@ -36,14 +36,3 @@ def getMaskFromDisc(mask_path : str,
     file.close()
     assert(isinstance(mask, np.ndarray))
     return mask if not is_torch else torch.from_numpy(mask)
-
-def getPaddingMask(mask : torch.Tensor, padding : int = 20):
-    pad = torch.nn.ZeroPad2d(padding)
-    return pad(mask)
-
-def getPrintImageFromPadding(image : torch.Tensor, pixel : int, padding : int = 20, batch = False):
-    padding = pixel * padding
-    if not batch:
-        return image[:, :, padding:image.shape[-2]-padding, padding:image.shape[-1]-padding]
-    assert image.dim() == 4
-    return image[:, :, padding:image.shape[-2]-padding, padding:image.shape[-1]-padding]
