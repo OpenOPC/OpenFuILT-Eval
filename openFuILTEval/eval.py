@@ -1,8 +1,6 @@
 import torch
 from torch import nn
 
-from queue import Queue
-from threading import Thread
 from typing import List, Tuple
 
 from openFuILT.src.geometry import BBox, Point
