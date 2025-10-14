@@ -14,7 +14,7 @@ def _to_image(box : np.ndarray, polygon : List[np.ndarray]) -> torch.Tensor:
     rects = []
     for p in polygon:
         p_s = p - np.array([box[0], box[1]])
-        rects += rectanglize(p_s.astype(np.int32))
+        rects += rectanglize(np.round(p_s).astype(np.int32))
     img = to_image([w, h], rects)
     return img
 
@@ -34,7 +34,7 @@ class TargetLayout:
         self.gdslib = gdspy.GdsLibrary(unit=unit)
         self.gdslib.read_gds(self.filePath)
         self.top_cell : Cell = self.gdslib.top_level()[0]
-        self.scales = self.unit / self.nano_unit
+        self.scales : int = self.unit / self.nano_unit
 
         self.polygons : List[np.ndarray] = []
         self._gen_polygon_tensor()
@@ -44,7 +44,7 @@ class TargetLayout:
     def _gen_polygon_tensor(self):
         for p in self.top_cell.get_polygons():
             p_scaled = p * self.scales # shape in [N, 2] 
-            p_scaled = p_scaled
+            p_scaled = np.round(p_scaled)
             self.polygons.append(p_scaled)
             
     def get_polygons(self) -> List[np.ndarray]:
