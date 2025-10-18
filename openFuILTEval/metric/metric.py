@@ -27,12 +27,10 @@ def getPVBand(positive : torch.tensor, negetive : torch.tensor):
 
 class ShotCounter: 
     @staticmethod
-    def count(mask):
+    def count(image):
         if not _has_adabox: 
             return None
-        if not isinstance(mask, torch.Tensor): 
-            mask = torch.tensor(mask, dtype=torch.float, device=torch.cpu())
-        image = image.detach().cpu().numpy().astype(np.uint8)
+        image = image.cpu().numpy().astype(np.uint8)
         comps, labels, stats, centroids = cv2.connectedComponentsWithStats(image)
         rectangles = []
         for label in range(1, comps): 
