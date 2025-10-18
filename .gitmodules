@@ -1,0 +1,3 @@
+[submodule "Adaptive-Boxes"]
+	path = 3rdparty/Adaptive-Boxes
+	url = git@github.com:OpenOPC/Adaptive-Boxes.git
