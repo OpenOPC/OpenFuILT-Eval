@@ -44,7 +44,7 @@ class TargetLayout:
     def _gen_polygon_tensor(self):
         for p in self.top_cell.get_polygons():
             p_scaled = p * self.scales # shape in [N, 2] 
-            p_scaled = np.round(p_scaled)
+            p_scaled = np.round(p_scaled).astype(np.int32)
             self.polygons.append(p_scaled)
             
     def get_polygons(self) -> List[np.ndarray]:
