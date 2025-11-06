@@ -19,7 +19,7 @@ class SimEval:
         
     @torch.no_grad()
     def sim(self):
-        ariel_image : torch.Tensor = None
+        aerial_image : torch.Tensor = None
         model = Abbe(self.mask.shape[0] * self.sim_config.pixel,
                            self.sim_config.pixel,
                            self.sim_config.sigma,
@@ -27,13 +27,15 @@ class SimEval:
                            self.sim_config.wavelength, 
                            self.sim_config.defocus
                            )
-        ariel_image = model(self.mask)
-        assert(ariel_image is not None)
-        if ariel_image.dim() == 4:
-            ariel_image = ariel_image.squeeze(0)
-        assert ariel_image.dim() == 3 and ariel_image.shape[0] == 3, \
-            f"Ariel image should be a 3D tensor with 3 channels, but we got {ariel_image.shape}"
-        print_image = torch.sigmoid(self.print_config.stepness * (ariel_image - self.print_config.targetIntensity))
-        return print_image
+        aerial_image = model(self.mask)
+        assert(aerial_image is not None)
+        if aerial_image.dim() == 4:
+            aerial_image = aerial_image.squeeze(0)
+        assert aerial_image.dim() == 3 and aerial_image.shape[0] == 3, \
+            f"Aerial image should be a 3D tensor with 3 channels, but we got {aerial_image.shape}"
+        aerial_image.sub_(self.print_config.targetIntensity)  
+        aerial_image.mul_(self.print_config.stepness)       
+        torch.sigmoid(aerial_image, out=aerial_image)        
+        return aerial_image
     
     
