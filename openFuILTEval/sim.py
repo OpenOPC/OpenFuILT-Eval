@@ -35,7 +35,8 @@ class SimEval:
             f"Aerial image should be a 3D tensor with 3 channels, but we got {aerial_image.shape}"
         aerial_image.sub_(self.print_config.targetIntensity)  
         aerial_image.mul_(self.print_config.stepness)       
-        torch.sigmoid(aerial_image, out=aerial_image)        
+        torch.sigmoid(aerial_image, out=aerial_image)  
+        torch.round(aerial_image. out=aerial_image)
         return aerial_image
     
     
