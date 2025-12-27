@@ -36,7 +36,7 @@ class SimEval:
         aerial_image.sub_(self.print_config.targetIntensity)  
         aerial_image.mul_(self.print_config.stepness)       
         torch.sigmoid(aerial_image, out=aerial_image)  
-        torch.round(aerial_image. out=aerial_image)
+        torch.round(aerial_image, out=aerial_image)
         return aerial_image
     
     
